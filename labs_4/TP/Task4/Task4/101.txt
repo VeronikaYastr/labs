@@ -1,0 +1,12 @@
+1 1 nothing
+5 1 nothing
+3 1 nothing
+4 1 nothing
+2 0 vvvv
+6 1 nothing
+7 1 nothing
+8 1 nothing
+9 1 nothing
+10 1 nothing
+11 1 nothing
+12 1 nothing

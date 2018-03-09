@@ -1,0 +1,3 @@
+Report on file 'w.bin'
+List of students with grade over '2' : 
+cmdk - group ¹3 - grade : 4
