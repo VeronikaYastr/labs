@@ -1,6 +1,5 @@
-
 (function(exports) {
-    const photoPosts = [
+    let photoPosts = [
         {
             id: '1',
             description: 'Грюйер стал для нас одним из самых излюбленных мест для прогулок, каждый раз открываем для себя что-то новое. ' +
@@ -52,7 +51,7 @@
         {
             id: '6',
             description: 'Одна голова хорошо, а две лучше:))',
-            createdAt: new Date('2018-02-20T08:10:00'),
+            createdAt: new Date('2018-02-20T08:30:00'),
             author: 'Kristy1333',
             photoLink: 'https://pp.userapi.com/c841323/v841323973/6450d/Amirwol0OaU.jpg',
             hashTags : ['#Switzerland', '#museum', '#mutants', '#turtle'],
@@ -189,6 +188,7 @@
     exports.getPhotoPosts = function getPhotoPosts(array, skip, top, filterConfig) {
         let newPhotoPosts = [];
 
+        array = array || photoPosts;
         skip = skip || 0;
         if(skip < 0 || skip >= array.length)
             skip = 0;
@@ -272,12 +272,14 @@
         return newArray.sort(function(a,b){return new Date(a.createdAt) - new Date(b.createdAt)});
     };
 
-    exports.getPhotoPost = function getPhotoPost(id) {
+    photoPosts = modulePost.sortByDate(photoPosts);
+
+    exports.getPhotoPost = function getPhotoPost(array, id) {
         if (id === undefined)
             return null;
-        for (let i = 0; i < photoPosts.length; i++)
-            if (photoPosts[i].id === id)
-                return photoPosts[i];
+        for (let i = 0; i < array.length; i++)
+            if (array[i].id === id)
+                return array[i];
 
         return null;
     };
@@ -309,7 +311,7 @@
         if (photoPost === undefined)
             return false;
 
-        if (validatePhotoPost(photoPost) && modulePost.getPhotoPost(photoPost.id) === null) {
+        if (validatePhotoPost(photoPost) && modulePost.getPhotoPost(photoPosts, photoPost.id) === null) {
             photoPosts.push(photoPost);
             return true;
         }
@@ -317,8 +319,8 @@
         return false;
     };
 
-    exports.editPhotoPost = function editPhotoPost(id, photoPost) {
-        let oldPhotoPost = modulePost.getPhotoPost(id);
+    exports.editPhotoPost = function editPhotoPost(array, id, photoPost) {
+        let oldPhotoPost = modulePost.getPhotoPost(array, id);
         let empty = true;
         if (oldPhotoPost === null || photoPost === undefined || id === undefined)
             return false;
@@ -353,21 +355,30 @@
         return empty === false;
     };
 
-    exports.removePhotoPost = function removePhotoPost(id) {
+    exports.removePhotoPost = function removePhotoPost(id, array) {
         if (id === undefined)
             return false;
-        for (let i = 0; i < photoPosts.length; i++)
-            if (photoPosts[i].id === id) {
-                photoPosts.splice(i, 1);
+        photoPosts.splice(photoPosts.findIndex(post => post.id === id), 1);
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].id === id) {
+                array.splice(i, 1);
+                localStorage.setItem("StartPosts", JSON.stringify(array));
                 return true;
             }
+        }
         return false;
     };
 
-    let startPosts = modulePost.getPhotoPosts(photoPosts, 0, 10);
-    const serialObj = JSON.stringify(startPosts);
-    exports.amount = startPosts.length;
-    //let username = functions.checkUser();
-    localStorage.setItem("StartPosts", serialObj);
+    let savedPosts = JSON.parse(localStorage.getItem("StartPosts"));
+    exports.amount = photoPosts.length;
+    if(savedPosts === null) {
+        let startPosts = modulePost.getPhotoPosts(photoPosts, 0, 10);
+        const serialObj = JSON.stringify(startPosts);
+        localStorage.setItem("StartPosts", serialObj);
+        exports.amount -= 10;
+    }
+    else {
+        exports.amount -= savedPosts.length;
+    }
 
 })(this.modulePost = {});

@@ -9,7 +9,6 @@
                 "<a href=\"\"><i class=\"fa fa-sign-in fa-2x\"></i></a>";
         }
         return user;
-
     };
 
     exports.show = function showPhotoPost(post, pos) {
@@ -53,13 +52,13 @@
 
         let likes = document.createElement("div");
         likes.className = "post-likes";
-        likes.innerHTML = "<p>" + post.likes.length + "</p>" +
-            "<i class=\"fa fa-heart-o\"></i>";
-
-        let trash = document.createElement("div");
-        trash.className = "edit";
-        trash.innerHTML = "<i class=\"fa fa-edit fa\"></i>" +
-            "<i class=\"fa fa-trash-o\"></i>";
+        let index = post.likes.indexOf("Veronika");
+        let icon = "";
+        if (index === -1)
+            icon = "fa fa-heart-o";
+        else
+            icon = "fa fa-heart";
+        likes.innerHTML = "<p>" + post.likes.length + "</p>" + "<i class=\"" + icon + "\" id = \"like" + post.id + "\"></i>";
 
         dateTime.appendChild(dateItem);
         dateTime.appendChild(timeItem);
@@ -68,8 +67,13 @@
         resultRight.appendChild(hashTagsList);
         resultRight.appendChild(likes);
 
-        if (isUser)
+        if (isUser) {
+            let trash = document.createElement("div");
+            trash.className = "edit";
+            trash.innerHTML = "<i class=\"fa fa-edit fa\"></i>" +
+                "<i class=\"fa fa-trash-o\" id = \"delete" + post.id + "\"></i>";
             resultRight.appendChild(trash);
+        }
 
         resultLeft.appendChild(resultImg);
         resultLeft.appendChild(resultDescription);
@@ -108,14 +112,20 @@
 
 } )(this.functions = {});
 
-function showPosts(skip, top,name, filterConfig) {
+function showPosts(skip, top, name, filterConfig) {
     //let username = functions.checkUser();
-
-        let array = JSON.parse(localStorage.getItem(name));
-        let photoPosts = modulePost.getPhotoPosts(array, skip, top, filterConfig);
-        modulePost.amount = photoPosts.length;
-        if(skip !== 0)
-            localStorage.setItem(name, JSON.stringify(photoPosts));
+    let photoPosts = [];
+    document.getElementsByClassName("photos")[0].innerHTML = "";
+    if(skip === 0) {
+        photoPosts = JSON.parse(localStorage.getItem(name));
+    }
+    else {
+        let newPhotoPosts = modulePost.getPhotoPosts(null, skip, top, filterConfig);
+        photoPosts = JSON.parse(localStorage.getItem(name)).concat(newPhotoPosts);
+        localStorage.setItem(name, JSON.stringify(photoPosts));
+        modulePost.amount -= newPhotoPosts.length;
+    }
+    events.skip = photoPosts.length;
     for (let i = 0; i < photoPosts.length; i++)
         functions.show(photoPosts[i], ++skip);
 
@@ -125,8 +135,13 @@ function addPost(post) {
     modulePost.addPhotoPost(post);
 }
 
-function removePost(id) {
-    modulePost.removePhotoPost(id);
+function removePost(i, array, id) {
+    modulePost.removePhotoPost(id, array);
+    document.getElementsByClassName("result circle-block")[i].style.display = 'none';
+    showPosts(0, 10, "StartPosts");
+    events.skip += 1;
+    events.delete();
+    events.likes();
 }
 
 function editPost(id,post) {
