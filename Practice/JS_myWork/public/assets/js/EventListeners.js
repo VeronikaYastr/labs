@@ -18,6 +18,8 @@ function navigate(){
     const fragmentId = location.hash.substr(1);
     getContent(fragmentId, function (content) {
         document.getElementById("cur").innerHTML = content;
+        let user = localStorage.getItem("user");
+        checkUser(user);
         if(fragmentId === "photos"){
             startWork();
         }
@@ -84,7 +86,24 @@ function filterForm() {
 }
 
 function addPost() {
-    
+    let user = localStorage.getItem("user");
+    let descr = document.forms['addForm']['description-upload'].value;
+    let tags = document.forms['addForm']['tags-upload'].value.split(" ");
+
+    let post = {};
+    post.id = localStorage.getItem("id") + 1;
+    localStorage.setItem("id", post.id);
+    post.author = user;
+    post.createdAt = new Date(Date.now());
+    post.description = descr;
+    post.hashTags = tags;
+    post.likes = [];
+    post.photoLink = 'https://pp.userapi.com/c824501/v824501399/d7c57/YUvjj-ydbHk.jpg';
+
+    modulePost.addPhotoPost(JSON.parse(localStorage.getItem("StartPosts")), post, "StartPosts");
+    modulePost.addPhotoPost(JSON.parse(localStorage.getItem("AllPosts")), post, "AllPosts");
+    location.hash = "#photos";
+    navigate();
 }
     //loading posts
 function loadPosts() {

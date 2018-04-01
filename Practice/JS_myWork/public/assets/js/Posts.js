@@ -2,10 +2,7 @@
     let photoPosts = [
         {
             id: '1',
-            description: 'Грюйер стал для нас одним из самых излюбленных мест для прогулок, каждый раз открываем для себя что-то новое. ' +
-            'Многие пробегают это местечко второпях, а то и вовсе не заглядывают в Грюйерский замок.' +
-            ' Но Швейцария — это та страна, где просто нельзя скакать «галопам по Европам». ' +
-            'Нужно «дегустировать» все интересности по чуть чуть, словно бокал вина!',
+            description: 'Грюйер стал для нас одним из самых излюбленных мест для прогулок',
             createdAt: new Date('2018-02-21T12:14:00'),
             author: 'Nata_Travel',
             photoLink: 'https://pp.userapi.com/c840225/v840225840/80f99/jGcPe8t7CPc.jpg',
@@ -15,7 +12,7 @@
         },
         {
             id: '2',
-            description: 'Возле Грюйерского замка нас ждала церковь св. Теодула \nПримечательна она тем, что на месте колокольни раньше была обсерватория.',
+            description: 'Возле Грюйерского замка нас ждала церковь св. Теодула.',
             createdAt: new Date('2018-02-21T12:30:00'),
             author: 'Nata_Travel',
             photoLink: 'https://pp.userapi.com/c831109/v831109840/8952e/FPUhzz7XW0w.jpg',
@@ -251,12 +248,13 @@
         return photoPost.photoLink.length !== 0;
     }
 
-    exports.addPhotoPost = function addPhotoPost(photoPost) {
+    exports.addPhotoPost = function addPhotoPost(array, photoPost, name) {
         if (photoPost === undefined)
             return false;
 
-        if (validatePhotoPost(photoPost) && modulePost.getPhotoPost(photoPosts, photoPost.id) === null) {
-            photoPosts.push(photoPost);
+        if (validatePhotoPost(photoPost) && modulePost.getPhotoPost(array, photoPost.id) === null) {
+            array.push(photoPost);
+            localStorage.setItem(name, JSON.stringify(modulePost.sortByDate(array)));
             return true;
         }
 
@@ -314,6 +312,7 @@
     let savedPosts = JSON.parse(localStorage.getItem("StartPosts"));
     let savedAllPosts = JSON.parse(localStorage.getItem("AllPosts"));
     exports.amount = photoPosts.length;
+    localStorage.setItem("id", '21');
     if(savedAllPosts === null)
         localStorage.setItem("AllPosts", JSON.stringify(photoPosts));
     else
