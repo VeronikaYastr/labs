@@ -1,6 +1,5 @@
-
 (function(exports) {
-    var photoPosts = [
+    let photoPosts = [
         {
             id: '1',
             description: 'Грюйер стал для нас одним из самых излюбленных мест для прогулок, каждый раз открываем для себя что-то новое. ' +
@@ -11,7 +10,8 @@
             author: 'Nata_Travel',
             photoLink: 'https://pp.userapi.com/c840225/v840225840/80f99/jGcPe8t7CPc.jpg',
             hashTags : ['#Switzerland', '#Gruyere'],
-            likes : ['Kristy133', 'Mike_Cool', 'MindyK', 'KevinAdams']
+            likes : ['Kristy133', 'Mike_Cool', 'MindyK', 'KevinAdams'],
+            isDeleted : 'false'
         },
         {
             id: '2',
@@ -20,7 +20,8 @@
             author: 'Nata_Travel',
             photoLink: 'https://pp.userapi.com/c831109/v831109840/8952e/FPUhzz7XW0w.jpg',
             hashTags : ['#Switzerland', '#Gruyere', '#Castle'],
-            likes : ['Kristy133', 'KevinAdams', 'Mike_Cool']
+            likes : ['Kristy133', 'KevinAdams', 'Mike_Cool'],
+            isDeleted : 'false'
         },
         {
             id: '3',
@@ -29,7 +30,8 @@
             author: 'Mike_Cool',
             photoLink: 'https://pp.userapi.com/c824501/v824501399/d7c57/YUvjj-ydbHk.jpg',
             hashTags : ['#Switzerland', '#Geneva', '#rainy', '#dark'],
-            likes : ['Nik Reid', 'Mike_Cool', 'MindyK', 'Mary Dale']
+            likes : ['Nik Reid', 'Mike_Cool', 'MindyK', 'Mary Dale'],
+            isDeleted : 'false'
         },
         {
             id: '4',
@@ -38,7 +40,8 @@
             author: 'Linda Clain',
             photoLink: 'https://pp.userapi.com/c840726/v840726235/60cb0/JlFDeECTQt8.jpg',
             hashTags : ['#morning', '#seafront', '#icicles', '#winter'],
-            likes : ['Nata_Travel', 'Kristy133', 'Freddy14_03', 'Nik Reid']
+            likes : ['Nata_Travel', 'Kristy133', 'Freddy14_03', 'Nik Reid'],
+            isDeleted : 'false'
         },
         {
             id: '5',
@@ -47,16 +50,18 @@
             author: 'Kristy1333',
             photoLink: 'https://pp.userapi.com/c830309/v830309235/a54ca/41sZfpg09S8.jpg',
             hashTags : ['#Switzerland', '#museum', '#animals'],
-            likes : ['Mike_Cool', 'Nelly_Mole', 'Mary Dale']
+            likes : ['Mike_Cool', 'Nelly_Mole', 'Mary Dale'],
+            isDeleted : 'false'
         },
         {
             id: '6',
             description: 'Одна голова хорошо, а две лучше:))',
-            createdAt: new Date('2018-02-20T08:10:00'),
+            createdAt: new Date('2018-02-20T08:30:00'),
             author: 'Kristy1333',
             photoLink: 'https://pp.userapi.com/c841323/v841323973/6450d/Amirwol0OaU.jpg',
             hashTags : ['#Switzerland', '#museum', '#mutants', '#turtle'],
-            likes : ['KevinAdams', 'Mike_Cool', 'Nik Reid', 'Mary Dale', 'Nelly_Mole']
+            likes : ['KevinAdams', 'Mike_Cool', 'Nik Reid', 'Mary Dale', 'Nelly_Mole'],
+            isDeleted : 'false'
         },
         {
             id: '7',
@@ -65,7 +70,8 @@
             author: 'ArtBlog',
             photoLink: 'https://pp.userapi.com/c840426/v840426235/5e37a/4_QtSGSJUAw.jpg',
             hashTags : [ '#art', '#graffiti', '#street_art', '#interesting'],
-            likes : ['Nata_Travel', 'Linda Clain', 'MindyK']
+            likes : ['Nata_Travel', 'Linda Clain', 'MindyK'],
+            isDeleted : 'false'
         },
         {
             id: '8',
@@ -74,7 +80,8 @@
             author: 'ArtBlog',
             photoLink: 'https://pp.userapi.com/c840525/v840525399/6357e/69vsUu3RI2I.jpg',
             hashTags : ['#art', '#blackPen',  '#drawings', '#students'],
-            likes : ['Kristy133', 'MindyK', 'Nelly_Mole']
+            likes : ['Kristy133', 'MindyK', 'Nelly_Mole'],
+            isDeleted : 'false'
         },
         {
             id: '9',
@@ -83,7 +90,8 @@
             author: 'Kristy133',
             photoLink: 'https://pp.userapi.com/c841622/v841622235/760be/t3x50ca5VIQ.jpg',
             hashTags : ['#nature', '#spring'],
-            likes : ['KevinAdams', 'Freddy14_03', 'Mary Dale']
+            likes : ['KevinAdams', 'Freddy14_03', 'Mary Dale'],
+            isDeleted : 'false'
         },
         {
             id: '10',
@@ -92,7 +100,8 @@
             author: 'KevinAdams',
             photoLink: 'https://pp.userapi.com/c841130/v841130235/7615d/p6h6-Mq9Ynk.jpg',
             hashTags : ['#UN', '#Switzerland', '#exursions'],
-            likes : ['Nik Reid', 'Linda Clain', 'MindyK']
+            likes : ['Nik Reid', 'Linda Clain', 'MindyK'],
+            isDeleted : 'false'
         },
         {
             id: '11',
@@ -101,7 +110,8 @@
             author: 'Mary Dale',
             photoLink: 'https://pp.userapi.com/c824409/v824409235/d75fd/U9CskC6GHeM.jpg',
             hashTags : ['#Switzerland', '#Berne', '#home'],
-            likes : ['Kristy133', 'Nelly_Mole',  'KevinAdams', 'MindyK', 'Mary Nice']
+            likes : ['Kristy133', 'Nelly_Mole',  'KevinAdams', 'MindyK', 'Mary Nice'],
+            isDeleted : 'false'
         },
         {
             id: '12',
@@ -110,7 +120,8 @@
             author: 'KevinAdams',
             photoLink: 'https://pp.userapi.com/c834300/v834300235/ddbb7/TPxaWfKpZoU.jpg',
             hashTags : ['#Switzerland', '#Geneva', '#cathedral', '#panorama'],
-            likes : ['Mary Dale', 'Mike_Cool', 'Nata_Travel']
+            likes : ['Mary Dale', 'Mike_Cool', 'Nata_Travel'],
+            isDeleted : 'false'
         },
         {
             id: '13',
@@ -119,7 +130,8 @@
             author: 'Nik Reid',
             photoLink: 'https://pp.userapi.com/c834104/v834104235/db573/nSqaJbfcrbw.jpg',
             hashTags : ['#France', '#beauty', '#mountains', '#nature'],
-            likes : ['Kristy133', 'Mary Nice', 'MindyK']
+            likes : ['Kristy133', 'Mary Nice', 'MindyK'],
+            isDeleted : 'false'
         },
         {
             id: '14',
@@ -128,7 +140,8 @@
             author: 'Nik Reid',
             photoLink: 'https://sun9-7.userapi.com/c840628/v840628235/5f578/6TmHkD-gUUo.jpg',
             hashTags : ['#Switzerland', '#mountains', '#cloudy', '#funicularRailway'],
-            likes : ['Kristy133', 'Mike_Cool', 'Linda Clain']
+            likes : ['Kristy133', 'Mike_Cool', 'Linda Clain'],
+            isDeleted : 'false'
         },
         {
             id: '15',
@@ -137,7 +150,8 @@
             author: 'Mike_Cool',
             photoLink: 'https://pp.userapi.com/c840639/v840639399/65123/cwkn1UmbRPQ.jpg',
             hashTags : ['#Switzerland', '#swans', '#Geneva', '#fountainJetd\'Eau'],
-            likes : ['Linda Clain', 'Mary Dale','Nik Reid', 'MindyK']
+            likes : ['Linda Clain', 'Mary Dale','Nik Reid', 'MindyK'],
+            isDeleted : 'false'
         },
         {
             id: '16',
@@ -146,7 +160,8 @@
             author: 'Nik Reid',
             photoLink: 'https://pp.userapi.com/c841236/v841236399/75a00/WTScqnwKses.jpg',
             hashTags : ['#France', '#birds', '#dreams'],
-            likes : ['Freddy14_03', 'MindyK', 'Mary Nice']
+            likes : ['Freddy14_03', 'MindyK', 'Mary Nice'],
+            isDeleted : 'false'
         },
         {
             id: '17',
@@ -164,7 +179,8 @@
             author: 'Mary Dale',
             photoLink: 'https://pp.userapi.com/c834303/v834303399/dbbfd/6Yf14H7mjd8.jpg',
             hashTags : ['#Geneva', '#school', '#magic'],
-            likes : ['Mary Dale', 'Mike_Cool', 'Mary Nice', 'KevinAdams']
+            likes : ['Mary Dale', 'Mike_Cool', 'Mary Nice', 'KevinAdams'],
+            isDeleted : 'false'
         },
         {
             id: '19',
@@ -173,7 +189,8 @@
             author: 'Mike_Cool',
             photoLink: 'https://pp.userapi.com/c841424/v841424399/773ea/OJ1B63EBlRU.jpg',
             hashTags : ['#night', '#Geneva'],
-            likes : ['Kristy133', 'Mary Nice', 'Freddy14_03', 'Nelly_Mole']
+            likes : ['Kristy133', 'Mary Nice', 'Freddy14_03', 'Nelly_Mole'],
+            isDeleted : 'false'
         },
         {
             id: '20',
@@ -182,14 +199,17 @@
             author: 'Linda Clain',
             photoLink: 'https://pp.userapi.com/c841038/v841038235/765f1/aY-3H-3vvHA.jpg',
             hashTags : ['#flowers', '#spring', '#tulips', 'good_mood'],
-            likes : ['Mary Dale', 'Nelly_Mole', 'Nik Reid', 'MindyK']
+            likes : ['Mary Dale', 'Nelly_Mole', 'Nik Reid', 'MindyK'],
+            isDeleted : 'false'
         }
     ];
-    exports.getPhotoPosts = function getPhotoPosts(skip, top, filterConfig) {
-        var newPhotoPosts = [];
 
+    exports.getPhotoPosts = function getPhotoPosts(array, skip, top, filterConfig) {
+        let newPhotoPosts = [];
+
+        array = array || photoPosts;
         skip = skip || 0;
-        if(skip < 0 || skip >= photoPosts.length)
+        if(skip < 0)
             skip = 0;
 
         top = top || 10;
@@ -199,27 +219,28 @@
         if(filterConfig !== undefined)
         {
             if("author" in filterConfig)
-                newPhotoPosts = filterByAuthor(filterConfig.author, photoPosts);
+                newPhotoPosts = filterByAuthor(filterConfig.author, array);
             if("date" in filterConfig)
-                newPhotoPosts = filterByDate(filterConfig.date, photoPosts);
+                newPhotoPosts = filterByDate(filterConfig.date, array);
             if("hashTags" in filterConfig)
-                newPhotoPosts = filterByHashTags(filterConfig.hashTags, photoPosts);
+                newPhotoPosts = filterByHashTags(filterConfig.hashTags, array);
             newPhotoPosts = modulePost.sortByDate(newPhotoPosts).slice(skip, skip + top);
         }
         else {
-            newPhotoPosts = modulePost.sortByDate(photoPosts).slice(skip, skip + top);
+            newPhotoPosts = modulePost.sortByDate(array).slice(skip, skip + top);
         }
 
         return newPhotoPosts;
     };
 
+
     function filterByAuthor(author, array) {
-        var newArray = [];
+        let newArray = [];
 
         if (author === undefined || array === undefined || array.length ===0)
             return newArray;
 
-        for (var i = 0; i < array.length; i++)
+        for (let i = 0; i < array.length; i++)
             if (array[i].author === author)
                 newArray.push(array[i]);
 
@@ -227,11 +248,11 @@
     }
 
     function filterByDate(date, array) {
-        var newArray = [];
+        let newArray = [];
 
         if (date === undefined || array === undefined || array.length ===0)
             return newArray;
-        for (var i = 0; i < array.length; i++)
+        for (let i = 0; i < array.length; i++)
             if (array[i].createdAt <= date)
                 newArray.push(array[i]);
 
@@ -239,13 +260,13 @@
     }
 
     function filterByHashTags(hashTags, array) {
-        var newArray = [];
+        let newArray = [];
 
         if (hashTags === undefined || hashTags.length === 0 || array === undefined || array.length ===0)
             return newArray;
 
         newArray = array.slice();
-        for(var i = 0; i < hashTags.length; i++) {
+        for(let i = 0; i < hashTags.length; i++) {
             if(newArray === null)
                 break;
             newArray = findHashTag(newArray, hashTags[i]);
@@ -254,28 +275,30 @@
     }
 
     function findHashTag(array, hashTag) {
-        var newArray = [];
+        let newArray = [];
 
         if(array === null || hashTag === undefined)
             return newArray;
 
-        for(var j = 0; j < array.length; j++)
+        for(let j = 0; j < array.length; j++)
             if(array[j].hashTags.indexOf(hashTag) !== -1)
                 newArray.push(array[j]);
         return newArray;
     }
 
     exports.sortByDate = function sortByDate(array) {
-        var newArray = array.slice();
-        return newArray.sort(function(a,b){return a.createdAt - b.createdAt});
+        let newArray = array.slice();
+        return newArray.sort(function(a,b){return new Date(a.createdAt) - new Date(b.createdAt)});
     };
 
-    exports.getPhotoPost = function getPhotoPost(id) {
+    photoPosts = modulePost.sortByDate(photoPosts);
+
+    exports.getPhotoPost = function getPhotoPost(array, id) {
         if (id === undefined)
             return null;
-        for (var i = 0; i < photoPosts.length; i++)
-            if (photoPosts[i].id === id)
-                return photoPosts[i];
+        for (let i = 0; i < array.length; i++)
+            if (array[i].id === id)
+                return array[i];
 
         return null;
     };
@@ -307,7 +330,7 @@
         if (photoPost === undefined)
             return false;
 
-        if (validatePhotoPost(photoPost) && modulePost.getPhotoPost(photoPost.id) === null) {
+        if (validatePhotoPost(photoPost) && modulePost.getPhotoPost(photoPosts, photoPost.id) === null) {
             photoPosts.push(photoPost);
             return true;
         }
@@ -315,9 +338,9 @@
         return false;
     };
 
-    exports.editPhotoPost = function editPhotoPost(id, photoPost) {
-        var oldPhotoPost = modulePost.getPhotoPost(id);
-        var empty = true;
+    exports.editPhotoPost = function editPhotoPost(array, id, photoPost) {
+        let oldPhotoPost = modulePost.getPhotoPost(array, id);
+        let empty = true;
         if (oldPhotoPost === null || photoPost === undefined || id === undefined)
             return false;
 
@@ -351,117 +374,36 @@
         return empty === false;
     };
 
-    exports.removePhotoPost = function removePhotoPost(id) {
+    exports.removePhotoPost = function removePhotoPost(id, array, name) {
         if (id === undefined)
             return false;
-        for (var i = 0; i < photoPosts.length; i++)
-            if (photoPosts[i].id === id) {
-                photoPosts.splice(i, 1);
-                return true;
-            }
+        let index = array.findIndex(post => post.id === id);
+        if(index !== -1) {
+            array.splice(index, 1);
+            localStorage.setItem(name, JSON.stringify(array));
+            return true;
+        }
         return false;
     };
 
-    function outputArray(array) {
-        if(array === null || array.length === 0)
-            console.log("No posts with such parameters.");
-        else console.log(array);
+    let savedPosts = JSON.parse(localStorage.getItem("StartPosts"));
+    let savedAllPosts = JSON.parse(localStorage.getItem("AllPosts"));
+    exports.amount = photoPosts.length;
+    if(savedAllPosts === null)
+        localStorage.setItem("AllPosts", JSON.stringify(photoPosts));
+    else
+        exports.amount = savedAllPosts.length;
+
+
+    if(savedPosts === null) {
+        let startPosts = modulePost.getPhotoPosts(savedAllPosts, 0, 10);
+        const serialObj = JSON.stringify(startPosts);
+        localStorage.setItem("StartPosts", serialObj);
+        exports.amount -= 10;
+    }
+    else {
+        exports.amount -= savedPosts.length;
     }
 
-    //check methods with console
-    function consoleWork() {
-        console.log("\n\nArray after sorting by date: ");
-        outputArray(modulePost.sortByDate(photoPosts));
-
-        console.group("\n\nMethod getPhotoPosts");
-        console.log("Without parameters : first 10 posts sorted by date : ");
-        outputArray(exports.getPhotoPosts());
-        console.log("\nSkip = 15, top = 12 :  12 posts(5 as a result) sorted by date starting from the 16th: ");
-        outputArray(modulePost.getPhotoPosts(15,12));
-        console.log("\nSkip = 8 :  10 posts sorted by date starting from the 9th: ");
-        outputArray(modulePost.getPhotoPosts(8));
-        console.log("\nfilterConfig = {author : 'Linda Clain'} : 10 posts by Linda Clain(2 as a result) sorted by date: ");
-        outputArray(modulePost.getPhotoPosts(0, 10, {author : 'Linda Clain'} ));
-        console.log("\nfilterConfig = {date : '01.02.2018'} : 10 posts sorted by date until this date");
-        outputArray(modulePost.getPhotoPosts(0, 10,{date : new Date('2018-02-01T22:14:00')} ));
-        console.log("\nfilterConfig = {hashTags : ['#Switzerland', '#Geneva'] : 10 posts sorted by date with hashTags(3 as a result)");
-        outputArray(modulePost.getPhotoPosts(0, 10, {hashTags : ['#Switzerland', '#Geneva']} ));
-        console.log("\nfilterConfig = {hashTags : ['#strangeHashTags'] : No posts with such parameters");
-        outputArray(modulePost.getPhotoPosts(0, 10, {hashTags : ['#strangeHashTags']} ));
-        console.log("\nfilterConfig = {colour : 'black'} : No posts with such parameters");
-        outputArray(modulePost.getPhotoPosts(0, 10,{colour : 'black'} ));
-        console.groupEnd();
-
-        console.group("\n\nMethod getPhotoPost");
-        console.log('photoPost with id 10 : ');
-        outputArray(modulePost.getPhotoPost('10'));
-        console.log('\nphotoPost with id 23(doesn\'t exist) : ');
-        outputArray(modulePost.getPhotoPost('23'));
-        console.groupEnd();
-
-        console.group("\n\nMethod validatePhotoPost");
-        console.log('Return true : ');
-        console.log(validatePhotoPost(modulePost.getPhotoPost('2')));
-        console.log('Return false because of long description : ');
-        console.log(validatePhotoPost(modulePost.getPhotoPost('1')));
-        console.log('Return false because of wrong id : ');
-        console.log(validatePhotoPost(modulePost.getPhotoPost('1')));
-        console.log('Return false because of less of arguments : ');
-        console.log(validatePhotoPost({id: '25', description: 'Just something', author: 'Lanny'}));
-        console.log('Return false because of empty argument(photoLink) : ');
-        console.log(validatePhotoPost({
-            id: '25',
-            description: 'Just something',
-            createdAt: new Date('2018-02-03T12:00:00'),
-            author: 'Lanny',
-            photoLink: '',
-            hashTags : ['#hash'],
-            likes : ['Katrine']
-        }));
-        console.groupEnd();
-
-        console.group("\n\nMethod addPhotoPost");
-        console.log('Return true : ');
-        console.log(modulePost.addPhotoPost({
-            id: '21',
-            description: 'Just something',
-            createdAt: new Date('2018-02-03T12:00:00'),
-            author: 'Lanny',
-            photoLink: 'https://pp.userapi.com/c841537/v841537399/78135/Z_1P54xxqdc.jpg',
-            hashTags : ['#someHashTags'],
-            likes : ['Man', 'Girl']
-        }));
-        console.log("\nArray after adding photoPost : ");
-        outputArray(photoPosts);
-        console.log('\n\nReturn false because of existing post with the same ID : ');
-        console.log(modulePost.addPhotoPost(modulePost.getPhotoPost('6')));
-        console.log('Return false because of validation : ');
-        console.log(modulePost.addPhotoPost({id: '25', description: 'Just something', author: 'Lanny'}));
-        console.groupEnd();
-
-        console.group("\n\nMethod editPhotoPost");
-        console.log('Return true : ');
-        outputArray(photoPosts[1]);
-        console.log(modulePost.editPhotoPost('2', {description : 'Gruyeres is really fantastic town!!!'}));
-        console.log("\nPhotoPost with id \'2\' after editing : ");
-        outputArray(photoPosts[1]);
-        console.log('\nReturn false because of invalid id : ');
-        console.log(modulePost.editPhotoPost('26', {description : 'Gruyeres is really fantastic town!!!'}));
-        console.log('\nReturn false because of changing parameters (you can\'t change id) : ');
-        console.log(modulePost.editPhotoPost('26', {id : '1'}));
-        console.log('\nReturn false because of invalid changes(too long description) : ');
-        console.log(modulePost.editPhotoPost('26', {description : modulePost.getPhotoPost('1').description}));
-        console.groupEnd();
-
-        console.group("\n\nMethod removePhotoPost");
-        console.log('Return true(delete photoPost with id \'1\' : ');
-        console.log(modulePost.removePhotoPost('1'));
-        console.log("\nArray after deleting photoPost : ");
-        outputArray(photoPosts);
-        console.log('\nReturn false because of invalid id \'100\' : ');
-        console.log(modulePost.removePhotoPost('100'));
-        console.groupEnd();
-    }
 
 })(this.modulePost = {});
-

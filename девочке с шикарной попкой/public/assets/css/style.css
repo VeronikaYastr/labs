@@ -6,12 +6,17 @@
   -ms-box-sizing:border-box;
   -o-box-sizing:border-box;
   box-sizing: border-box;
+  -webkit-transition: All 0.8s ease;
+  -moz-transition: All 0.8s ease;
+  -o-transition: All 0.8s ease;
+  -ms-transition: All 0.8s ease;
+  transition: All 0.8s ease;
 }
 
 body {
-  background: aliceblue;
+  background: mintcream;
   font-weight: normal;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family:  'Roboto', Arial, sans-serif;
 }
 
 
@@ -75,7 +80,7 @@ body {
 
 .circle-block{
   border-radius: 15px;
-  box-shadow: 2px 2px 2px 2px #e5e5e5;
+  box-shadow: 0px 2px 2px 0px #a2a2a2;
   background-color: white;
 }
 
@@ -100,7 +105,7 @@ body {
 .univer p{
   text-indent: 20px;
   color: #000000;
-  font-size: 10px;
+  font-size: 15px;
   text-align: left;
   margin-left: 40px;
 }
@@ -123,9 +128,6 @@ body {
   position: relative;
   margin: 10px 0;
 }
-
-
-
 
 
 
@@ -166,7 +168,7 @@ body {
 }
 
 .filter-group p{
-  font-size: 13px;
+  font-size: 15px;
   margin-bottom: 3px;
 }
 
@@ -174,7 +176,7 @@ body {
   padding-top: 3px;
   padding-bottom: 3px;
   margin-bottom: 4px;
-  font-size: 10px;
+  font-size: 15px;
   width: 100%;
 }
 
@@ -194,7 +196,19 @@ body {
 }
 
 .search-title h2{
+  margin: 1em 0 0.5em 0;
   font-size:20px;
+  font-family: "Comic Sans MS";
+}
+.search-title h3{
+  margin: 1em 0 0.5em 0;
+  color : blueviolet;
+  font-size: 22px;
+  line-height: 40px;
+  font-weight: normal;
+  font-family: 'Orienta', sans-serif;
+  letter-spacing: 1px;
+  font-style: italic;
 }
 
 .photos{
@@ -242,6 +256,7 @@ body {
   height: 100%;
   width: 70%;
   float: left;
+  font-family: "Comic Sans MS";
 }
 
 .result-img{
@@ -260,12 +275,14 @@ body {
   padding-left: 3px;
   height: 15%;
   width: 100%;
+  font-family: "Comic Sans MS";
 }
 
 
 .result-description p{
   margin: 0 0 0 0;
   font-size: 0.85rem;
+  font-family: "Comic Sans MS";
 }
 
 .result-right{
@@ -293,6 +310,7 @@ body {
 .result-right ul li{
   margin-left: 0;
   font-size: 0.85rem;
+  font-family: "Comic Sans MS";
 }
 
 .post-description{
@@ -301,6 +319,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: row;
+  font-family: "Comic Sans MS";
 }
 .time{
   display: flex;
@@ -313,7 +332,6 @@ body {
 }
 
 .post-description p{
-  font-size: 0.85rem;
   margin: 0 0 0 0;
 }
 
@@ -330,11 +348,14 @@ body {
   cursor: pointer;
   font-size: 20px;
   padding-left: 3px;
+  margin: 25px 0 0 0;
+
 }
 
 .post-likes p{
-  font-size: 0.85rem;;
-  margin: 0 0 0 0;
+  font-size: 0.95rem;
+  margin: 25px 0 0 0;
+  font-family: "Comic Sans MS";
 }
 
 .edit{
@@ -514,82 +535,140 @@ svg{
   height: calc(100vh - 260px);
 }
 
-.edit-post{
-  width: 50%;
-  padding-left: 10px ;
-  float: right;
-  height: calc(100vh - 260px);
+.edit-post {
+  min-height: calc(100vh - 200px);
 }
 
-.edit{
-  width: 100% ;
-  padding: 10px 20px 20px 20px;
-  height: 100%;
-}
-
-
-.edit-post-canvas{
-  background-color: white;
-  padding: 10px 10px 10px 10px;
-  height: 400px;
-}
-
-.canvas{
-  height: 100%;
-  width: 100%;
-}
-
-.edit-button{
-  margin: 10px 0 10px 0;
-  text-align: center;
-}
-
-.edit-button button{
-  border-radius: 20px;
-  margin: 5px 0 10px 0;
-  padding: 3px 0 3px 0;
-  font-size: 20px;
-  color: white;
-  width: 120px;
-  border: 0;
-  background-color: blue;
-}
-
-
-.load-image{
+.edit-photo{
   width: 70%;
-  padding-top: 40px;
-  float: left;
-  border: 1px dotted black;
-  height: 100%;
+  padding: 30px 30px 30px 30px;
   text-align: center;
-}
-
-.load-image button{
-  border-radius: 20px;
-  margin: 5px 0 10px 0;
-  padding: 3px 0 3px 0;
-  font-size: 20px;
-  color: white;
-  width: 120px;
-  border: 0;
-  background-color: forestgreen;
-
+  float: left;
+  min-height: 20px;
 }
 
 .edit-description{
+  height: calc(100vh - 200px);
+  padding: 30px 30px 30px 30px;
+  resize: none;
   width: 30%;
-  padding-left: 10px;
-  float: right;
+  float:right;
+  background-color: #d8e4f2;
+  border-radius: 10px;
 }
 
 .edit-description label{
-  font-size: 15px;
+  font-size: 20px;
+  font-family: "Comic Sans MS";
 }
+
+textarea {
+  resize: none;
+  border-radius: 5px;
+}
+
+#edit-photo-load{
+  height: calc(100vh - 250px);
+  border-style: dotted;
+  border-radius: 10px;
+}
+
+#edit-photo-load h1{
+  margin-top: 15%;
+  font-size: 40px;
+}
+
+#edit-photo-load button{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  background-color: forestgreen;
+  border: 0;
+  font-weight: lighter;
+  font-size: 18px;
+  margin: 30px 10% 30px 10%;
+  width: 50%;
+  color: white;
+  cursor: pointer;
+  font-family: "Comic Sans MS";
+}
+
+#edit-photo-load button:hover {
+  background-color: #aedd94;
+}
+
+.edit-photo-load p{
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+
 
 .input-upload-photos{
   width: 100%;
-  resize: none;
   height: 60px;
   margin-bottom: 10px;
+}
+
+.button-upload-photo{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  background-color: forestgreen;
+  border: 0;
+  font-weight: lighter;
+  font-size: 18px;
+  margin: 0 20% 10px 10%;
+  width: 80%;
+  color: white;
+  cursor: pointer;
+  font-family: "Comic Sans MS";
+}
+
+.button-upload-photo:hover{
+  background-color: #aedd94;
+}
+
+#edit-photo-load img{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 1000px) {
+  #edit-photo-load h1{
+    margin-top: 100px;
+    font-size: 25px;
+  }
+
+  #edit-photo-load button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: forestgreen;
+    border: 0;
+    font-weight: lighter;
+    font-size: 10px;
+    width: 140px;
+    margin-top: 10px;
+    color: white;
+    cursor: pointer;
+  }
+
+  #edit-photo-load p{
+    margin-top: 10px;
+    font-size: 10px;
+  }
+  .button-upload-photo{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: forestgreen;
+    border: 0;
+    font-weight: lighter;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+
+  }
+
 }
