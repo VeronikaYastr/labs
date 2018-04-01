@@ -205,90 +205,15 @@
     ];
 
     exports.getPhotoPosts = function getPhotoPosts(array, skip, top, filterConfig) {
-        let newPhotoPosts = [];
 
-        array = array || photoPosts;
-        skip = skip || 0;
-        if(skip < 0)
-            skip = 0;
 
-        top = top || 10;
-        if(top <= 0)
-            top = 10;
-
-        if(filterConfig !== undefined)
-        {
-            if("author" in filterConfig)
-                newPhotoPosts = filterByAuthor(filterConfig.author, array);
-            if("date" in filterConfig)
-                newPhotoPosts = filterByDate(filterConfig.date, array);
-            if("hashTags" in filterConfig)
-                newPhotoPosts = filterByHashTags(filterConfig.hashTags, array);
-            newPhotoPosts = modulePost.sortByDate(newPhotoPosts).slice(skip, skip + top);
-        }
-        else {
-            newPhotoPosts = modulePost.sortByDate(array).slice(skip, skip + top);
-        }
-
-        return newPhotoPosts;
+        return modulePost.sortByDate(array).slice(skip, skip + top);
     };
 
 
-    function filterByAuthor(author, array) {
-        let newArray = [];
-
-        if (author === undefined || array === undefined || array.length ===0)
-            return newArray;
-
-        for (let i = 0; i < array.length; i++)
-            if (array[i].author === author)
-                newArray.push(array[i]);
-
-        return newArray;
-    }
-
-    function filterByDate(date, array) {
-        let newArray = [];
-
-        if (date === undefined || array === undefined || array.length ===0)
-            return newArray;
-        for (let i = 0; i < array.length; i++)
-            if (array[i].createdAt <= date)
-                newArray.push(array[i]);
-
-        return newArray;
-    }
-
-    function filterByHashTags(hashTags, array) {
-        let newArray = [];
-
-        if (hashTags === undefined || hashTags.length === 0 || array === undefined || array.length ===0)
-            return newArray;
-
-        newArray = array.slice();
-        for(let i = 0; i < hashTags.length; i++) {
-            if(newArray === null)
-                break;
-            newArray = findHashTag(newArray, hashTags[i]);
-        }
-        return newArray;
-    }
-
-    function findHashTag(array, hashTag) {
-        let newArray = [];
-
-        if(array === null || hashTag === undefined)
-            return newArray;
-
-        for(let j = 0; j < array.length; j++)
-            if(array[j].hashTags.indexOf(hashTag) !== -1)
-                newArray.push(array[j]);
-        return newArray;
-    }
-
     exports.sortByDate = function sortByDate(array) {
         let newArray = array.slice();
-        return newArray.sort(function(a,b){return new Date(a.createdAt) - new Date(b.createdAt)});
+        return newArray.sort(function(a,b){return new Date(b.createdAt) - new Date(a.createdAt)});
     };
 
     photoPosts = modulePost.sortByDate(photoPosts);

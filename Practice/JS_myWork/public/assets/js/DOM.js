@@ -6,16 +6,19 @@
         if (isUser) {
             document.getElementsByClassName("header-item")[0].innerHTML = "<a href=\"#photos\"><i class=\"fa fa-male fa-3x\" ></i></a>" + "<h1>" + user + "</h1>";
             document.getElementsByClassName("header-left")[0].innerHTML = "<a href=\"#add\"><i class=\"fa fa-camera-retro fa-2x\" ></i></a>\n" +
-                "<a href=\"\"><i id=\"logout\" class=\"fa fa-sign-in fa-2x\"></i></a>";
+                "<a href=\"#photos\"><i id=\"logout\" class=\"fa fa-sign-in fa-2x\"></i></a>";
         }
-        else
+        else {
+            document.getElementsByClassName("header-item")[0].innerHTML = "";
             document.getElementsByClassName("header-left")[0].innerHTML = "" +
-                "<a href=\"\"><i id=\"login\" class=\"fa fa-sign-in fa-2x\"></i></a>";
+                "<a href=\"#login\"><i id=\"login\" class=\"fa fa-sign-in fa-2x\"></i></a>";
+        }
 
         return user;
     };
 
     exports.show = function showPhotoPost(post, pos) {
+        let photos = document.getElementsByClassName("photos")[0];
         let isUser = (user === post.author);
         let circleBlock = document.createElement("div");
         circleBlock.className = "result circle-block";
@@ -87,11 +90,6 @@
         photos.insertBefore(circleBlock, photos.children[pos]);
     };
 
-    let search = document.getElementsByClassName("search-results")[0];
-    let photos = document.createElement("div");
-    photos.className = "photos";
-    search.appendChild(photos);
-
     function getFormatDate(post) {
         let date = new Date(post.createdAt);
         let day = date.getDate();
@@ -117,9 +115,29 @@
 } )(this.functions = {});
 
 function showPosts(skip, top, name) {
-
     let photoPosts = [];
     document.getElementsByClassName("photos")[0].innerHTML = "";
+    let filterPosts = JSON.parse(localStorage.getItem("foundPosts"));
+
+    let loadButton = document.getElementById("load");
+    if (modulePost.amount > 0) {
+        loadButton.addEventListener("click", loadPosts);
+        loadButton.style.display = 'block';
+    }
+    else
+        loadButton.style.display = 'none';
+
+    if(filterPosts !== null){
+        let filters = JSON.parse(localStorage.getItem("filters")).split(",");
+        if(filters.filter(item => item === "").length === 3)
+        {
+            name = "StartPosts";
+            loadButton.style.display = 'block';
+        }
+        else
+            loadButton.style.display = 'block';
+    }
+
     if(skip === 0) {
         photoPosts = JSON.parse(localStorage.getItem(name));
     }
