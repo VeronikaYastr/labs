@@ -64,7 +64,28 @@ function loginSubmit() {
     navigate();
 }
 
+function filterForm() {
+    let date = document.forms['filter']['date'].value;
+    let author = document.forms['filter']['name'].value;
+    let hashs = document.forms['filter']['hashTags'].value.split(" ");
+    let foundPosts = JSON.parse(localStorage.getItem("StartPosts"));
 
+    if(date !== "")
+        foundPosts = foundPosts.filter(post => (new Date(post.createdAt) <= Date.now()));
+    if(author !== "")
+        foundPosts = foundPosts.filter(post => post.author === author);
+    if(!hashs.every(item => item === ""))
+        for(let i = 0; i < hashs.length; i++)
+            foundPosts = foundPosts.filter(post => post.hashTags.indexOf(hashs[i]) !== -1);
+
+    localStorage.setItem("foundPosts", JSON.stringify(foundPosts));
+    localStorage.setItem("filters", JSON.stringify(date + "," + author + "," + hashs));
+    showPosts(0,10, "foundPosts");
+}
+
+function addPost() {
+    
+}
     //loading posts
 function loadPosts() {
     showPosts(events.skip, 10, "StartPosts");

@@ -118,6 +118,8 @@ function showPosts(skip, top, name) {
     let photoPosts = [];
     document.getElementsByClassName("photos")[0].innerHTML = "";
     let filterPosts = JSON.parse(localStorage.getItem("foundPosts"));
+    let notFound = document.getElementsByTagName("h3")[0];
+    notFound.innerHTML = "";
 
     let loadButton = document.getElementById("load");
     if (modulePost.amount > 0) {
@@ -128,14 +130,22 @@ function showPosts(skip, top, name) {
         loadButton.style.display = 'none';
 
     if(filterPosts !== null){
+        name = "foundPosts";
         let filters = JSON.parse(localStorage.getItem("filters")).split(",");
         if(filters.filter(item => item === "").length === 3)
         {
             name = "StartPosts";
             loadButton.style.display = 'block';
         }
-        else
-            loadButton.style.display = 'block';
+        else {
+            loadButton.style.display = 'none';
+            document.forms['filter']['date'].value = filters[0];
+            document.forms['filter']['name'].value = filters[1];
+            document.forms['filter']['hashTags'].value = filters[2];
+
+            if(filterPosts.length === 0)
+                notFound.innerHTML = "Sorry, no matches found...";
+        }
     }
 
     if(skip === 0) {
