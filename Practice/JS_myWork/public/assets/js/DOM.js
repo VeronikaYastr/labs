@@ -135,6 +135,7 @@ function showPosts(skip, top, name) {
         if(filters.filter(item => item === "").length === 3)
         {
             name = "StartPosts";
+            localStorage.removeItem("foundPosts");
             loadButton.style.display = 'block';
         }
         else {

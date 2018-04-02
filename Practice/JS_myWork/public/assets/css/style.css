@@ -610,6 +610,25 @@ textarea {
   margin-bottom: 10px;
 }
 
+.button-cancel-photo{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  background-color: #d32222;
+  border: 0;
+  font-weight: lighter;
+  font-size: 18px;
+  margin: 0 20% 10px 10%;
+  width: 80%;
+  color: white;
+  cursor: pointer;
+  font-family: "Comic Sans MS";
+}
+
+.button-cancel-photo:hover{
+  background-color: #f16a6a;
+}
+
 .button-upload-photo{
   padding-top: 5px;
   padding-bottom: 5px;

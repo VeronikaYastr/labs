@@ -23,6 +23,23 @@ function navigate(){
         if(fragmentId === "photos"){
             startWork();
         }
+        if(fragmentId === "add"){
+            document.getElementsByClassName("input-upload-photos")[0].addEventListener("keydown", function () {
+                if(event.keyCode === 32 || event.keyCode === 0) {
+                    setTimeout(function(){document.forms['addForm']['tags-upload'].value += "#"}, 10);
+                }
+            });
+            document.getElementsByClassName("input-upload-photos")[0].addEventListener("focus", function () {
+                if(document.forms['addForm']['tags-upload'].value === "")
+                    document.forms['addForm']['tags-upload'].value = "#";
+            });
+            document.getElementById("cancel").addEventListener("click", function () {
+                if(confirm("Do you want to leave this page?")) {
+                    location.hash = "#photos";
+                    navigate();
+                }
+            })
+        }
     });
 }
 
@@ -85,13 +102,18 @@ function filterForm() {
     showPosts(0,10, "foundPosts");
 }
 
+function fillTags(elem) {
+    elem.value = elem.value.concat(" #");
+}
+
 function addPost() {
     let user = localStorage.getItem("user");
+
     let descr = document.forms['addForm']['description-upload'].value;
     let tags = document.forms['addForm']['tags-upload'].value.split(" ");
 
     let post = {};
-    post.id = localStorage.getItem("id") + 1;
+    post.id = parseInt(localStorage.getItem("id")) + 1;
     localStorage.setItem("id", post.id);
     post.author = user;
     post.createdAt = new Date(Date.now());
@@ -100,15 +122,21 @@ function addPost() {
     post.likes = [];
     post.photoLink = 'https://pp.userapi.com/c824501/v824501399/d7c57/YUvjj-ydbHk.jpg';
 
-    modulePost.addPhotoPost(JSON.parse(localStorage.getItem("StartPosts")), post, "StartPosts");
-    modulePost.addPhotoPost(JSON.parse(localStorage.getItem("AllPosts")), post, "AllPosts");
-    location.hash = "#photos";
-    navigate();
+    if(!modulePost.addPhotoPost(JSON.parse(localStorage.getItem("StartPosts")), post, "StartPosts"))
+    {
+        alert('Some fields are not filled!');
+    }
+    else {
+        localStorage.removeItem("adding");
+        modulePost.addPhotoPost(JSON.parse(localStorage.getItem("AllPosts")), post, "AllPosts");
+        location.hash = "#photos";
+        navigate();
+    }
 }
-    //loading posts
+
 function loadPosts() {
     showPosts(events.skip, 10, "StartPosts");
-    //events.menu(document.getElementsByClassName("photos"));
+
     if (modulePost.amount <= 0) {
         this.removeEventListener("click", loadPosts);
         this.style.display = 'none';

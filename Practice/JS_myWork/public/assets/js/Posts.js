@@ -228,15 +228,15 @@
     function validatePhotoPost(photoPost) {
         if (photoPost.id === undefined)
             return false;
-        if (photoPost.description === undefined)
+        if (photoPost.description === undefined || photoPost.description === "" )
             return false;
         if (photoPost.createdAt === undefined)
             return false;
         if (photoPost.author === undefined)
             return false;
-        if (photoPost.photoLink === undefined)
+        if (photoPost.photoLink === undefined || photoPost.photoLink === "" )
             return false;
-        if (photoPost.hashTags === undefined || photoPost.hashTags.length === 0)
+        if (photoPost.hashTags === undefined || photoPost.hashTags.every(item => item ===""))
             return false;
         if (photoPost.likes === undefined)
             return false;
@@ -313,8 +313,10 @@
     let savedAllPosts = JSON.parse(localStorage.getItem("AllPosts"));
     exports.amount = photoPosts.length;
     localStorage.setItem("id", '21');
-    if(savedAllPosts === null)
+    if(savedAllPosts === null) {
         localStorage.setItem("AllPosts", JSON.stringify(photoPosts));
+        savedAllPosts = photoPosts;
+    }
     else
         exports.amount = savedAllPosts.length;
 
