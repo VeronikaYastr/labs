@@ -202,8 +202,6 @@
     ];
 
     exports.getPhotoPosts = function getPhotoPosts(array, skip, top, filterConfig) {
-
-
         return modulePost.sortByDate(array).slice(skip, skip + top);
     };
 
@@ -261,7 +259,7 @@
         return false;
     };
 
-    exports.editPhotoPost = function editPhotoPost(array, id, photoPost) {
+    exports.editPhotoPost = function editPhotoPost(array, id, photoPost, name) {
         let oldPhotoPost = modulePost.getPhotoPost(array, id);
         let empty = true;
         if (oldPhotoPost === null || photoPost === undefined || id === undefined)
@@ -293,6 +291,8 @@
                 empty = false;
             }
         }
+
+        localStorage.setItem(name, JSON.stringify(array));
 
         return empty === false;
     };

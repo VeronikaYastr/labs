@@ -6,7 +6,7 @@
         if (isUser) {
             document.getElementsByClassName("header-item")[0].innerHTML = "<a href=\"#photos\"><i class=\"fa fa-male fa-3x\" ></i></a>" + "<h1>" + user + "</h1>";
             document.getElementsByClassName("header-left")[0].innerHTML = "<a href=\"#add\"><i class=\"fa fa-camera-retro fa-2x\" ></i></a>\n" +
-                "<a href=\"#photos\"><i id=\"logout\" class=\"fa fa-sign-in fa-2x\"></i></a>";
+                "<a href=\"#photos\"><i id=\"logout\" class=\"fa fa-sign-out fa-2x\"></i></a>";
         }
         else {
             document.getElementsByClassName("header-item")[0].innerHTML = "";
@@ -77,7 +77,7 @@
         if (isUser) {
             let trash = document.createElement("div");
             trash.className = "edit";
-            trash.innerHTML = "<i class=\"fa fa-edit fa\"></i>" +
+            trash.innerHTML = "<i class=\"fa fa-edit fa\" id = \"edit" + post.id + "\"></i>" +
                 "<i class=\"fa fa-trash-o\" id = \"delete" + post.id + "\"></i>";
             resultRight.appendChild(trash);
         }
@@ -116,6 +116,7 @@
 
 function showPosts(skip, top, name) {
     let photoPosts = [];
+    localStorage.removeItem("editing");
     document.getElementsByClassName("photos")[0].innerHTML = "";
     let filterPosts = JSON.parse(localStorage.getItem("foundPosts"));
     let notFound = document.getElementsByTagName("h3")[0];
@@ -175,6 +176,7 @@ function removePost(elem, array, id) {
         modulePost.removePhotoPost(id, array, "StartPosts");
         elem.parentNode.parentNode.parentNode.style.display = 'none';
         showPosts(0, 10, "StartPosts");
+        menu(document.getElementsByClassName("photos")[0]);
     }
 }
 

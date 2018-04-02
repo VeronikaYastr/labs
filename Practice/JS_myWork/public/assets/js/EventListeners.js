@@ -1,5 +1,6 @@
 (function(exports) {
     exports.skip = 0;
+    exports.link = 'https://sun9-8.userapi.com/c830208/v830208049/c5a0e/frB0c9aQ9ZI.jpg';
 })(this.events = {});
 
 function getContent(fragmentId, callback){
@@ -23,6 +24,8 @@ function navigate(){
         if(fragmentId === "photos"){
             startWork();
         }
+
+        //filling field with hashTags with "#" before new hashTag
         if(fragmentId === "add"){
             document.getElementsByClassName("input-upload-photos")[0].addEventListener("keydown", function () {
                 if(event.keyCode === 32 || event.keyCode === 0) {
@@ -38,7 +41,10 @@ function navigate(){
                     location.hash = "#photos";
                     navigate();
                 }
-            })
+            });
+            if(localStorage.getItem("editing") !== null)
+                document.getElementsByClassName("add-page-title")[0].children[0].innerHTML = "Edit photo";
+            setPhoto(events.link);
         }
     });
 }
@@ -52,6 +58,7 @@ navigate();
 
 window.addEventListener("hashchange", navigate);
 
+//loading start posts
 function startWork() {
     let user = localStorage.getItem("user");
     checkUser(user);
@@ -102,38 +109,65 @@ function filterForm() {
     showPosts(0,10, "foundPosts");
 }
 
-function fillTags(elem) {
-    elem.value = elem.value.concat(" #");
-}
 
 function addPost() {
     let user = localStorage.getItem("user");
+    let editPost = JSON.parse(localStorage.getItem("editing"));
+    let isEditing = false;
+    if(editPost !== null)
+        isEditing = true;
 
     let descr = document.forms['addForm']['description-upload'].value;
     let tags = document.forms['addForm']['tags-upload'].value.split(" ");
 
     let post = {};
-    post.id = parseInt(localStorage.getItem("id")) + 1;
-    localStorage.setItem("id", post.id);
-    post.author = user;
-    post.createdAt = new Date(Date.now());
-    post.description = descr;
-    post.hashTags = tags;
-    post.likes = [];
-    post.photoLink = 'https://pp.userapi.com/c824501/v824501399/d7c57/YUvjj-ydbHk.jpg';
+    if(isEditing){
+        post = editPost;
+        if(desr !== "")
+            post.description = descr;
+        if(!tags.every(item => item === ""))
+            post.hashTags = tags;
 
-    if(!modulePost.addPhotoPost(JSON.parse(localStorage.getItem("StartPosts")), post, "StartPosts"))
-    {
-        alert('Some fields are not filled!');
+        if(!modulePost.editPhotoPost(JSON.parse(localStorage.getItem("StartPosts")),post.id, post, "StartPosts"))
+        {
+            alert('Some fields are incorrectly filled!');
+        }
+        else {
+            modulePost.editPhotoPost(JSON.parse(localStorage.getItem("AllPosts")),post.id, post, "AllPosts");
+            localStorage.removeItem("editing");
+            location.hash = "#photos";
+            navigate();
+        }
     }
     else {
-        localStorage.removeItem("adding");
-        modulePost.addPhotoPost(JSON.parse(localStorage.getItem("AllPosts")), post, "AllPosts");
-        location.hash = "#photos";
-        navigate();
+        post.id = (parseInt(localStorage.getItem("id")) + 1) + "";
+        localStorage.setItem("id", post.id);
+        post.author = user;
+        post.createdAt = new Date(Date.now());
+        post.description = descr;
+        post.hashTags = tags;
+        post.likes = [];
+
+        //default link
+        events.link = 'https://sun9-8.userapi.com/c830208/v830208049/c5a0e/frB0c9aQ9ZI.jpg';
+        post.photoLink = events.link;
+
+        if (!modulePost.addPhotoPost(JSON.parse(localStorage.getItem("StartPosts")), post, "StartPosts")) {
+            alert('Some fields are not filled!');
+        }
+        else {
+            modulePost.addPhotoPost(JSON.parse(localStorage.getItem("AllPosts")), post, "AllPosts");
+            location.hash = "#photos";
+            navigate();
+        }
     }
 }
 
+function setPhoto(link) {
+    document.getElementById("edit-photo-load").innerHTML = "<img src = \"" + link + "\">";
+}
+
+//load with button
 function loadPosts() {
     showPosts(events.skip, 10, "StartPosts");
 
@@ -144,7 +178,7 @@ function loadPosts() {
 }
 
 
-    //likes
+//likes
 function makeLike(elem, id, author) {
     let savedPosts = JSON.parse(localStorage.getItem("StartPosts"));
     let post = modulePost.getPhotoPost(savedPosts, id);
@@ -180,6 +214,7 @@ function sizeLike(like, isOn) {
     }, 400);
 }
 
+//events : delete, like and edit
 function menu(elem) {
     let savedPosts = JSON.parse(localStorage.getItem("StartPosts"));
 
@@ -191,7 +226,14 @@ function menu(elem) {
             makeLike(target, id.replace('like', ''), "Veronika");
         if (id.startsWith("delete"))
             removePost(target, savedPosts, id.replace('delete', ''));
-
+        if(id.startsWith("edit"))
+        {
+            let post = JSON.parse(localStorage.getItem("StartPosts")).find(post => post.id === id.replace('edit', ''));
+            localStorage.setItem("editing", JSON.stringify(post));
+            events.link = post.photoLink;
+            location.hash = "#add";
+            navigate();
+        }
     });
 }
 
